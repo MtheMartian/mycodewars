@@ -1,22 +1,17 @@
 function tribonacci(signature, n){
-  let tribArray = [];
-  if(n == 0){
-    return tribArray;
+  let tribArray = signature;
+  if(n == 0 || n < 0){
+    return tribArray = [];
   }
-
-  for(let  i = 0; i < n; i++){
-    if(tribArray.length == 0){
-      tribArray.push(signature[0]);
-    }
-    else if(tribArray.length == 1){
-      tribArray.push(signature[1]);
-    }
-    else if(tribArray.length == 2){
-      tribArray.push(signature[2]);
-    }
+  else if(n < 3){
+    tribArray.length = n; 
+  }
+  for(let i = 0; i < n - 3; i++){
     if(tribArray.length >= 3){
-      tribArray.push(tribArray[i] + tribArray[i+1] + tribArray[i+2]);
+      let sumThem = tribArray[i] + tribArray[i + 1] + tribArray[i + 2];
+      tribArray.push(sumThem);
     }
-  }
-console.log(tribArray);
+  } 
+  
+return tribArray;
 }
