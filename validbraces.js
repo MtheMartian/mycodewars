@@ -1,20 +1,45 @@
 function validBraces(braces){
-  let parenthesis = false;
-  let twoBraces = false;
-  let curly = false;
-    if(braces.includes('()')){
-      parenthesis = true;
+  let left = 0;
+  let right = 0;
+  if(braces.includes('([)') || braces.includes('(])') || braces.includes('({)') || 
+      braces.includes('(})') || braces.includes('[(]') || braces.includes('[)]') || 
+      braces.includes('[{]') || braces.includes('[}]') || braces.includes('{(}') || 
+      braces.includes('{)}') || braces.includes('{[}') || braces.includes('{]}')){
+        return false;
+  }
+  else{
+    for(let brace in braces){
+      if(braces[brace].includes('(') || braces[brace].includes('[') || braces[brace].includes('{')){
+        ++left;
+      }
+      else{
+        ++right;
+      }
     }
-    if(braces.includes('[]')){
-      twoBraces = true;
-    }
-    if(braces.includes('{}')){
-      curly = true;
-    }
-    if(parenthesis && twoBraces && curly){
-      console.log(true);
+    if(braces[braces.length - 2] == '(' && braces[braces.length - 1] == ')' ||
+    braces[braces.length - 2] == '[' && braces[braces.length - 1] == ']' ||
+    braces[braces.length - 2] == '{' && braces[braces.length - 1] == '}' ||
+    // Doubles
+    braces[braces.length - 2] == ')' && braces[braces.length - 1] == ')' ||
+    braces[braces.length - 2] == ']' && braces[braces.length - 1] == ']' ||
+    braces[braces.length - 2] == '}' && braces[braces.length - 1] == '}' ||
+    // Doubles but, different braces
+    braces[braces.length - 2] == ')' && braces[braces.length - 1] == ']' ||
+    braces[braces.length - 2] == ')' && braces[braces.length - 1] == '}' ||
+    braces[braces.length - 2] == ']' && braces[braces.length - 1] == ')' ||
+    braces[braces.length - 2] == ']' && braces[braces.length - 1] == '}' ||
+    braces[braces.length - 2] == '}' && braces[braces.length - 1] == ')' ||
+    braces[braces.length - 2] == '}' && braces[braces.length - 1] == ']'){
+        
     }
     else{
-      console.log(false);
+      right -= 1;
     }
+    if(left == right){
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
 }
