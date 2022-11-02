@@ -1,11 +1,17 @@
 function cakes(recipe, available){
-  if(Object.keys(recipe).length <= Object.keys(available).length){
-    console.log('Yup you can bake it!');
+  let numOfElements = 0;
+  let [ingredient, amount] = Object.entries(recipe)[numOfElements];
+  let howMany = 0;
+  for(const[key, value] of Object.entries(available)){
+    for(let i = 0; i < Object.keys(available).length; i++){
+      if(Object.keys(available)[i] === ingredient){
+        numOfElements = numOfElements + 1;
+        if(Object.values(available)[i] / amount >= 1){
+          howMany += (Object.values(available)[i] / amount);
+        }
+        console.log(key);
+      } 
+    }
   }
+  console.log(howMany / Object.keys(recipe).length);
 }
-
-// for(const [key, value] of Object.entries(available)){
-  //   if(Object.keys(recipe).includes(key)){
-  //     console.log(true);
-  //   }
-  // } 
