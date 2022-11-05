@@ -1,8 +1,16 @@
 function cakes(recipe, available){
   let numOfElements = 0;
   let [ingredient, amount] = Object.entries(recipe)[numOfElements];
-  let howMany = 0;
+  let availableAmount = 0;
+  let recipeAmount = 0;
   let howManyTimes = 0;
+  let duplicate = [];
+
+  Object.values(recipe).forEach(amount =>{
+    recipeAmount += Number(amount);
+  });
+
+  console.log(recipeAmount);
 
   const filteredAvailable = Object.keys(available).filter((ingredients, index) =>{
     if(Object.keys(recipe).includes(ingredients)){
@@ -13,13 +21,21 @@ function cakes(recipe, available){
     }
   });
 
-  for(let i = 0; i < filteredAvailable.length; i ++){
-    if(filteredAvailable[i] === ingredient){
-      numOfElements += 1;
-      howManyTimes += 1;
+  for(let i = 0; i < filteredAvailable.length; i++){ 
+    if(howManyTimes >= 1){
+      return console.log("Can't bake that!");
     }
-    else if(howManyTimes > 1){
-      return console.log("'Can't bake that cake!");
+    else{
+      if(filteredAvailable[i] === ingredient && !duplicate.includes(ingredient)){
+        duplicate.push(ingredient); 
+        console.log(duplicate + howManyTimes);
+      }
+      else if(filteredAvailable[i] !== ingredient){
+        numOfElements += 1;
+      }
+      else if(duplicate.includes(ingredient)){
+        howManyTimes += 1;
+      }
     }
   }
 
@@ -33,12 +49,13 @@ function cakes(recipe, available){
         if(Object.keys(available)[i] === ingredient){
           numOfElements = numOfElements + 1;
           if(Object.values(available)[i] / amount >= 1){
-            howMany += (Math.floor(Object.values(available)[i] / amount));
+            availableAmount += Object.values(available)[i];
           }
           console.log(key);
         } 
       }
     }
   }
-  console.log(Math.floor(howMany / Object.keys(recipe).length));
+  
+  Math.floor(availableAmount / recipeAmount) >= 1 ? console.log(Math.floor(availableAmount / recipeAmount)) : console.log(0);
 }
